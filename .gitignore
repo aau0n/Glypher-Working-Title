@@ -1,0 +1,32 @@
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+
+# Visual Studio 관련
+.vs/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.user
+*.userprefs
+
+# OS 관련
+.DS_Store
+*.swp
+*.tmp
+*.bak
+*.old
+*.orig
+*.~*
+
+# 기타
+*.apk
+*.aab
+*.zip
+*.rar
+*.tar
