@@ -30,3 +30,6 @@
 *.zip
 *.rar
 *.tar
+
+UserSettings/
+UserSettings/EditorUserSettings.asset
