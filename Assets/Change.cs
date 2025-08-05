@@ -7,7 +7,7 @@ public class Change : MonoBehaviour
 {
     public void SceneChange()
     {
-        SceneManager.LoadScene("customer");
+        SceneManager.LoadScene("Opening");
     }
     
 }
