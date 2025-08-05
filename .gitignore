@@ -31,5 +31,5 @@
 *.rar
 *.tar
 
+# Unity 사용자 설정 (개인 설정, Git에 올리지 말 것)
 UserSettings/
-UserSettings/EditorUserSettings.asset

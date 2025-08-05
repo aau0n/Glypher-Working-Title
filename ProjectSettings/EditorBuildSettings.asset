@@ -23,6 +23,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main2.unity
     guid: 556e55d79b7387b4e971911d16252da0
+  - enabled: 1
+    path: Assets/Scenes/After_Tattoo.unity
+    guid: c3d15f3a44d53c048bf7723df896ab7a
+  - enabled: 1
+    path: Assets/Scenes/Bridge_Night.unity
+    guid: 49ee614858a03ac45b8ad336e6120702
+  - enabled: 1
+    path: "Assets/Scenes/Main3_\uB3C4\uC801\uC9C8.unity"
+    guid: 65f66bb1fdb1df847b0d7bf568d88af8
+  - enabled: 1
+    path: "Assets/Scenes/Main4_\uB3C4\uC801\uC9C8X.unity"
+    guid: e1dd48bc579d9f94690ab362c93c2eb2
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
