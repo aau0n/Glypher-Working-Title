@@ -1,0 +1,204 @@
+fileFormatVersion: 2
+guid: 1f22e05a238f4a447b37c761ddbea8b6
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4595853399368950062
+    second: DetachStencil_0
+  - first:
+      213: 3603819989974300632
+    second: DetachStencil_1
+  - first:
+      213: -2707422412564269467
+    second: DetachStencil_2
+  - first:
+      213: -1442399453120493922
+    second: DetachStencil_3
+  - first:
+      213: 2893960012769403244
+    second: DetachStencil_4
+  - first:
+      213: -8525217658841210475
+    second: DetachStencil_5
+  - first:
+      213: -3903499730766723608
+    second: DetachStencil_6
+  - first:
+      213: 8118505692203807378
+    second: DetachStencil_7
+  - first:
+      213: -3669736818162705156
+    second: DetachStencil_8
+  - first:
+      213: -4512695310587917850
+    second: DetachStencil_9
+  - first:
+      213: -1048074044032153819
+    second: DetachStencil_10
+  - first:
+      213: 726273978180623415
+    second: DetachStencil_11
+  - first:
+      213: 984160175028748837
+    second: DetachStencil_12
+  - first:
+      213: 5659491290486198307
+    second: DetachStencil_13
+  - first:
+      213: -7507142821955629250
+    second: DetachStencil_14
+  - first:
+      213: 213464611866415472
+    second: DetachStencil_15
+  - first:
+      213: -7764346536415340605
+    second: DetachStencil_16
+  - first:
+      213: 1643723255810480644
+    second: DetachStencil_17
+  - first:
+      213: 1820434198285537469
+    second: DetachStencil_18
+  - first:
+      213: -8619220191061179229
+    second: DetachStencil_19
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: DetachStencil_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 2144
+        height: 1201
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e21682d1150c7cf30800000000000000
+      internalID: 4595853399368950062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 9a2aff05c4eb00d4e81a9e7be29e0aa6
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceOnImport
+        value: False
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":2144.0,"y":1201.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      DetachStencil_0: 4595853399368950062
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
