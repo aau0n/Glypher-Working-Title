@@ -11,9 +11,9 @@ public class TimerBar : MonoBehaviour
     public TextMeshProUGUI timerText;
 
     private bool isBlinking = false;
-    private float blinkSpeed = 4f;
+    private float blinkSpeed = 6f;
 
-    // 🎨 색상 설정
+    // 색상 설정
     public Color normalTextColor = new Color32(0xDE, 0x82, 0xFF, 255); // #DE82FF
     public Color warningTextColor = new Color32(0xFF, 0x99, 0x00, 255); // #FF9900
 
@@ -33,13 +33,16 @@ public class TimerBar : MonoBehaviour
             currentTime -= Time.deltaTime;
             timerSlider.value = currentTime;
 
+            // 남은 시간 숫자 표시 (초 없음)
             timerText.text = Mathf.CeilToInt(currentTime).ToString();
 
+            // 30초 이하부터 깜빡임 시작
             if (currentTime <= 30f)
             {
                 isBlinking = true;
             }
 
+            // 텍스트 색상 깜빡임
             if (isBlinking)
             {
                 float t = 0.5f + 0.5f * Mathf.Sin(Time.time * blinkSpeed);
@@ -51,6 +54,9 @@ public class TimerBar : MonoBehaviour
             timerSlider.value = 0;
             timerText.text = "0";
             timerText.color = warningTextColor;
+
+            // ✅ 슬라이더 전체를 숨김
+            timerSlider.gameObject.SetActive(false);
         }
     }
 }
