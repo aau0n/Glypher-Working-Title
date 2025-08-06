@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class change_NextButton : MonoBehaviour
+public class SceneChanger_5to6 : MonoBehaviour
 {
     public void SceneChange()
     {
-        SceneManager.LoadScene("5Tattoo");
+        SceneManager.LoadScene("6AfterTattoo");
         Debug.Log("next 버튼 클릭");
     }
 }
