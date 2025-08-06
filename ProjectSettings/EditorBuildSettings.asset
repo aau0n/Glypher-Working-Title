@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/4Stencil.unity
     guid: 2b4e46dd88f04464187757a31e278350
   - enabled: 1
-    path: Assets/Scenes/Main2.unity
+    path: Assets/Scenes/5Tattoo.unity
     guid: 556e55d79b7387b4e971911d16252da0
   - enabled: 1
     path: Assets/Scenes/6AfterTattoo.unity
