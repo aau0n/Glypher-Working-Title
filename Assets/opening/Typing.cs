@@ -31,7 +31,7 @@ public class Typing : MonoBehaviour
     public GameObject op1, op2, op3;
     public GameObject triangleIndicator;        // ▽ 삼각형(이미지) 오브젝트
     public GameObject endTriangleIndicator;     // ▷ 삼각형(이미지) 오브젝트
-    public string nextSceneName = "customer"; // 전환할 씬 이름
+    public string nextSceneName = "3Customer"; // 전환할 씬 이름
     private bool dialogueEnded = false;  // 마지막 문장 출력 끝났는지
     private bool readyToSwitch = false;  // endTriangleIndicator가 떴는지
 

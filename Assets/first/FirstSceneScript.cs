@@ -54,7 +54,7 @@ public class FirstSceneScript : MonoBehaviour
                 switch (spriteIdx)
                 {
                     case 0: // 새 게임
-                        SceneManager.LoadScene("Opening");
+                        SceneManager.LoadScene("2Opening");
                         break;
                     case 1: // 이어하기
                         // SceneManager.LoadScene("ContinueScene");
