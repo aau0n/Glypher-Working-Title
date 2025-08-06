@@ -20,10 +20,17 @@ public class TimerBar : MonoBehaviour
     void Start()
     {
         currentTime = maxTime;
-        timerSlider.maxValue = maxTime;
-        timerSlider.value = maxTime;
 
-        timerText.color = normalTextColor;
+        if (timerSlider != null)
+        {
+            timerSlider.maxValue = maxTime;
+            timerSlider.value = maxTime;
+        }
+
+        if (timerText != null)
+        {
+            timerText.color = normalTextColor;
+        }
     }
 
     void Update()
@@ -31,10 +38,17 @@ public class TimerBar : MonoBehaviour
         if (currentTime > 0)
         {
             currentTime -= Time.deltaTime;
-            timerSlider.value = currentTime;
 
-            // 남은 시간 숫자 표시 (초 없음)
-            timerText.text = Mathf.CeilToInt(currentTime).ToString();
+            if (timerSlider != null)
+            {
+                timerSlider.value = currentTime;
+            }
+
+            if (timerText != null)
+            {
+                // 남은 시간 숫자 표시 (초 없음)
+                timerText.text = Mathf.CeilToInt(currentTime).ToString();
+            }
 
             // 30초 이하부터 깜빡임 시작
             if (currentTime <= 30f)
@@ -43,7 +57,7 @@ public class TimerBar : MonoBehaviour
             }
 
             // 텍스트 색상 깜빡임
-            if (isBlinking)
+            if (isBlinking && timerText != null)
             {
                 float t = 0.5f + 0.5f * Mathf.Sin(Time.time * blinkSpeed);
                 timerText.color = Color.Lerp(normalTextColor, warningTextColor, t);
@@ -51,12 +65,17 @@ public class TimerBar : MonoBehaviour
         }
         else
         {
-            timerSlider.value = 0;
-            timerText.text = "0";
-            timerText.color = warningTextColor;
+            if (timerSlider != null)
+            {
+                timerSlider.value = 0;
+                timerSlider.gameObject.SetActive(false); // 슬라이더 숨김
+            }
 
-            // ✅ 슬라이더 전체를 숨김
-            timerSlider.gameObject.SetActive(false);
+            if (timerText != null)
+            {
+                timerText.text = "0";
+                timerText.color = warningTextColor;
+            }
         }
     }
 }
