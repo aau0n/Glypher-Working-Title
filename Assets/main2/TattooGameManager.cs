@@ -70,6 +70,7 @@ public class TattooGameManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             PaintCurrentTile();
+            MoveNext();
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
