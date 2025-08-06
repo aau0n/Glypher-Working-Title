@@ -38,25 +38,27 @@ public class CustomerScript : MonoBehaviour
 
     IEnumerator FadeIn()
     {
-        if (!customerNormal.gameObject.activeSelf)
-            customerNormal.gameObject.SetActive(true);
+        // 비활성화 상태라면 먼저 활성화부터
+        if (!customerNormal.activeSelf)
+            customerNormal.SetActive(true);
 
+        Image img = customerNormal.GetComponent<Image>();
+        
         // 알파 0(완전 투명)으로 초기화
-        Color color = customerNormal.color;
+        Color color = img.color;
         color.a = 0f;
-        customerNormal.color = color;
+        img.color = color;
 
         float timer = 0f;
         while (timer < fadeDuration)
         {
             timer += Time.deltaTime;
             color.a = Mathf.Lerp(0, 1, timer / fadeDuration);
-            customerNormal.color = color;
+            img.color = color;
             yield return null;
         }
-        // 최종적으로 완전히 불투명하게
         color.a = 1f;
-        customerNormal.color = color;
+        img.color = color;
     }
 
     void Awake()
@@ -70,7 +72,7 @@ public class CustomerScript : MonoBehaviour
     public void PlayEffect()
     {
         // 한 번만 플레이(중첩 허용)
-        audioSource.PlayOneShot(effectClip);
+        audioSource.PlayOneShot(doorEffectClip);
     }
 
     // Update is called once per frame
