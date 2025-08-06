@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Typing : MonoBehaviour
 {
@@ -23,17 +24,23 @@ public class Typing : MonoBehaviour
     private bool isTyping = false;
     private bool waitingForClick = false;
 
-    public GameObject op1, op2, op3;
-
     // Object 언제 등장시킬지 인덱스 (0부터 시작)
     public int op2ActivateAfterSentence = 3; // 3번(네 번째) 문장과 함께
     public int op3ActivateAfterSentence = 4; // 4번(다섯 번째) 문장과 함께
 
+    public GameObject op1, op2, op3;
+    public GameObject triangleIndicator;        // ▽ 삼각형(이미지) 오브젝트
+    public GameObject endTriangleIndicator;     // ▷ 삼각형(이미지) 오브젝트
+    public string nextSceneName = "customer"; // 전환할 씬 이름
+    private bool dialogueEnded = false;  // 마지막 문장 출력 끝났는지
+    private bool readyToSwitch = false;  // endTriangleIndicator가 떴는지
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         currSentence = 0;
+        if (triangleIndicator != null) triangleIndicator.SetActive(false);
+        if (endTriangleIndicator != null) endTriangleIndicator.SetActive(false);
         if (op2 != null) op2.SetActive(false);
         if (op3 != null) op3.SetActive(false);
         ShowCurrentSentence();
@@ -42,9 +49,15 @@ public class Typing : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // 문장 출력 후 클릭 대기
         if (waitingForClick && Input.GetMouseButtonDown(0))
         {
             NextSentence();
+        }
+        // 마지막 이미지가 뜬 상태에서 클릭하면 씬 전환
+        if (readyToSwitch && Input.GetMouseButtonDown(0))
+        {
+            SceneManager.LoadScene(nextSceneName);
         }
     }
 
@@ -57,44 +70,57 @@ public class Typing : MonoBehaviour
     {
         isTyping = true;
         waitingForClick = false;
+        if (triangleIndicator != null) triangleIndicator.SetActive(false);
+
         dialogueText.text = "";
 
-        // 띄어쓰기 두 번이면 줄바꿈으로 바꿈
-        if (message.Contains("  ")) message = message.Replace("  ", "\n");
-
         foreach (char c in message)
-            {
-                dialogueText.text += c;
-                yield return new WaitForSeconds(typingSpeed);
-            }
+        {
+            dialogueText.text += c;
+            yield return new WaitForSeconds(typingSpeed);
+        }
 
         isTyping = false;
-        waitingForClick = true;
+
+        if (currSentence < sentences.Length - 1)
+        {
+            // 마지막 문장 전까진 삼각형 활성화
+            if (triangleIndicator != null) triangleIndicator.SetActive(true);
+            waitingForClick = true;
+        }
+        else
+        {
+            // 마지막 문장 끝, endImage를 띄우고 클릭을 대기!
+            dialogueEnded = true;
+            StartCoroutine(ShowEndImageAndWaitForClick());
+        }
     }
 
     void NextSentence()
     {
         waitingForClick = false;
+        if (triangleIndicator != null) triangleIndicator.SetActive(false);
 
         currSentence++;
 
-        // 문장 번호에 따라 오브젝트 등장
         if (currSentence == op2ActivateAfterSentence && op2 != null)
-        {
             op2.SetActive(true);
-        }
         if (currSentence == op3ActivateAfterSentence && op3 != null)
-        {
             op3.SetActive(true);
-        }
 
         if (currSentence < sentences.Length)
         {
             ShowCurrentSentence();
         }
-        else
-        {
-            // dialogueText.text = ""; // 혹은 마지막 문장 유지
-        }
+    }
+
+    IEnumerator ShowEndImageAndWaitForClick()
+    {
+        if (triangleIndicator != null) triangleIndicator.SetActive(false);
+        if (endTriangleIndicator != null) endTriangleIndicator.SetActive(true);
+
+        readyToSwitch = true; // 이제 클릭하면 씬 전환!
+
+        yield return null; // 클릭 대기는 Update()에서 처리
     }
 }
