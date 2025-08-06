@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: 786b7e347f2ef22419a7c517baf0e10f
+guid: c947f5bb52e3ad740b1c17b304635be0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 145124376609629621
-    second: Tattoo_whole_0
+      213: 2165280935660055903
+    second: InkBasic_0
+  - first:
+      213: 1728871321806063852
+    second: InkBasic_1
+  - first:
+      213: -3475506208236823983
+    second: InkBasic_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -24,7 +30,7 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
     flipGreenChannel: 0
-  isReadable: 1
+  isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -100,13 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tattoo_whole_0
+      name: InkBasic_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 5
         y: 0
-        width: 720
-        height: 720
+        width: 140
+        height: 199
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +121,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5b521140ad5930200800000000000000
-      internalID: 145124376609629621
+      spriteID: f5d61f0f98f9c0e10800000000000000
+      internalID: 2165280935660055903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InkBasic_1
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 0
+        width: 140
+        height: 199
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce84c96ae4f2ef710800000000000000
+      internalID: 1728871321806063852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InkBasic_2
+      rect:
+        serializedVersion: 2
+        x: 317
+        y: 0
+        width: 140
+        height: 199
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15a1163848584cfc0800000000000000
+      internalID: -3475506208236823983
       vertices: []
       indices: 
       edges: []
@@ -135,7 +185,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Tattoo_whole_0: 145124376609629621
+      InkBasic_0: 2165280935660055903
+      InkBasic_1: 1728871321806063852
+      InkBasic_2: -3475506208236823983
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

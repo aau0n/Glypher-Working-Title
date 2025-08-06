@@ -10,7 +10,18 @@ public class TattooGameManager : MonoBehaviour
     public GameObject tileBluePrefab;
     public Transform gridParent;
     public SpriteRenderer backgroundPattern;
-    public RectTransform cursor; // 커서 오브젝트 연결
+    public RectTransform cursor;
+
+    public Image ink1; // 연두색
+    public Image ink2; // 핑크색
+    public Image ink3; // 보라색
+
+    public Sprite inkPopGreen;
+    public Sprite inkPopPink;
+    public Sprite inkPopBlue;
+    public Sprite inkBasicGreen;
+    public Sprite inkBasicPink;
+    public Sprite inkBasicBlue;
 
     private GameObject[,] tiles = new GameObject[10, 10];
     private Color[,] correctPattern = new Color[10, 10];
@@ -20,10 +31,19 @@ public class TattooGameManager : MonoBehaviour
     private int currentY = 9;
     private GameObject selectedPrefab = null;
 
-    private Vector2 gridOrigin = new Vector2(0f, 0f); // gridParent 기준 상대 좌표
+    private Vector2 gridOrigin = new Vector2(0f, 0f);
+
+    private Vector2 defaultInkPosition1;
+    private Vector2 defaultInkPosition2;
+    private Vector2 defaultInkPosition3;
 
     void Start()
     {
+        // 기본 위치 저장
+        defaultInkPosition1 = ink1.rectTransform.anchoredPosition;
+        defaultInkPosition2 = ink2.rectTransform.anchoredPosition;
+        defaultInkPosition3 = ink3.rectTransform.anchoredPosition;
+
         CreateGrid();
         ExtractCorrectPattern();
         HighlightCurrentTile();
@@ -31,9 +51,21 @@ public class TattooGameManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A)) selectedPrefab = tilePinkPrefab;
-        if (Input.GetKeyDown(KeyCode.S)) selectedPrefab = tileGreenPrefab;
-        if (Input.GetKeyDown(KeyCode.D)) selectedPrefab = tileBluePrefab;
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            selectedPrefab = tileGreenPrefab;
+            HighlightInk(ink1, inkPopGreen);
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            selectedPrefab = tilePinkPrefab;
+            HighlightInk(ink2, inkPopPink);
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            selectedPrefab = tileBluePrefab;
+            HighlightInk(ink3, inkPopBlue);
+        }
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -44,6 +76,36 @@ public class TattooGameManager : MonoBehaviour
         {
             MoveNext();
         }
+    }
+
+    void HighlightInk(Image inkImage, Sprite poppedSprite)
+    {
+        // 모든 잉크 원래 스프라이트로
+        ink1.sprite = inkBasicGreen;
+        ink2.sprite = inkBasicPink;
+        ink3.sprite = inkBasicBlue;
+
+        // 모든 잉크 사이즈 원래대로
+        ink1.rectTransform.sizeDelta = new Vector2(138, 198);
+        ink2.rectTransform.sizeDelta = new Vector2(138, 198);
+        ink3.rectTransform.sizeDelta = new Vector2(138, 198);
+
+        // 위치 원상복구
+        ink1.rectTransform.anchoredPosition = defaultInkPosition1;
+        ink2.rectTransform.anchoredPosition = defaultInkPosition2;
+        ink3.rectTransform.anchoredPosition = defaultInkPosition3;
+
+        // 해당 잉크 팝 이미지로
+        inkImage.sprite = poppedSprite;
+
+        // 사이즈 늘리기
+        Vector2 normalSize = new Vector2(138, 198);
+        Vector2 poppedSize = new Vector2(138, 242);
+        inkImage.rectTransform.sizeDelta = poppedSize;
+
+        // 아래 기준으로 위로 올라가게
+        float deltaY = (poppedSize.y - normalSize.y) / 2f-20;
+        inkImage.rectTransform.anchoredPosition += new Vector2(0, deltaY);
     }
 
     void CreateGrid()
@@ -57,18 +119,16 @@ public class TattooGameManager : MonoBehaviour
 
                 RectTransform rt = emptyTile.GetComponent<RectTransform>();
                 rt.sizeDelta = new Vector2(72, 72);
-                rt.anchoredPosition = new Vector2(gridOrigin.x + x * 72, gridOrigin.y + y * 72); // 아래에서 위로
+                rt.anchoredPosition = new Vector2(gridOrigin.x + x * 72, gridOrigin.y + y * 72);
 
                 Image img = emptyTile.GetComponent<Image>();
                 img.color = Color.clear;
 
-                // 아래에서 위로 시작
                 tiles[x, y] = emptyTile;
                 userInput[x, y] = Color.clear;
             }
         }
     }
-
 
     void ExtractCorrectPattern()
     {
@@ -82,11 +142,10 @@ public class TattooGameManager : MonoBehaviour
                 int py = y * 72 + 36;
 
                 Color pixelColor = tex.GetPixel(px, py);
-                correctPattern[x, y] = pixelColor; // y 그대로 사용
+                correctPattern[x, y] = pixelColor;
             }
         }
     }
-
 
     void PaintCurrentTile()
     {
@@ -103,7 +162,6 @@ public class TattooGameManager : MonoBehaviour
             painted.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
             painted.GetComponent<RectTransform>().sizeDelta = new Vector2(72, 72);
 
-            //색상 직접 지정
             if (selectedPrefab == tilePinkPrefab)
                 userInput[currentX, currentY] = new Color32(0xF5, 0x36, 0xE2, 0xFF);
             else if (selectedPrefab == tileGreenPrefab)
@@ -113,10 +171,8 @@ public class TattooGameManager : MonoBehaviour
         }
     }
 
-
     void MoveNext()
     {
-        // 현재 칸이 마지막 칸이라면: (9, 0)
         if (currentX == 9 && currentY == 0)
         {
             UnhighlightCurrentTile();
@@ -138,14 +194,11 @@ public class TattooGameManager : MonoBehaviour
         HighlightCurrentTile();
     }
 
-
-
     void HighlightCurrentTile()
     {
         Image img = tiles[currentX, currentY].GetComponent<Image>();
         img.color = new Color(1f, 0f, 1f, 0.3f);
 
-        // 커서 위치 이동
         if (cursor != null)
         {
             cursor.SetParent(tiles[currentX, currentY].transform, false);
@@ -186,15 +239,11 @@ public class TattooGameManager : MonoBehaviour
             }
         }
 
-     
-
-        //static 변수에 저장
         ScoreManager.score = score;
         ScoreManager.total = total;
 
         float percentage = ScoreManager.GetPercentage();
         Debug.Log($"점수: {score}/{total} ({percentage:F1}%)");
-
     }
 
     bool IsTransparent(Color color)
@@ -209,6 +258,4 @@ public class TattooGameManager : MonoBehaviour
                Mathf.Abs(a.g - b.g) < threshold &&
                Mathf.Abs(a.b - b.b) < threshold;
     }
-
 }
-
