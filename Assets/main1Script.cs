@@ -97,7 +97,7 @@ public class MainScript : MonoBehaviour
 
         StartCoroutine(OnTattooSelectedRoutine());
 
-        ShowTapBar1();
+        
     }
 
     private IEnumerator OnTattooSelectedRoutine()
@@ -109,6 +109,10 @@ public class MainScript : MonoBehaviour
 
         if (typer != null)
             typer.StartTyping("이제 <color=#FF9900>스페이스 바</color>를\n타이밍에 맞게 눌러서 도안을 붙였다 떼봐!");
+        
+        yield return new WaitForSeconds(2f);
+        
+        ShowTapBar1();
     }
 
     public void OnStencil()
