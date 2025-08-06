@@ -930,6 +930,7 @@ GameObject:
   - component: {fileID: 784274679}
   - component: {fileID: 784274681}
   - component: {fileID: 784274680}
+  - component: {fileID: 784274682}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -954,7 +955,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 72.01}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &784274680
 MonoBehaviour:
@@ -1055,6 +1056,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 784274678}
   m_CullTransparentMesh: 1
+--- !u!114 &784274682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 784274678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 495c7de76e615c14d804f443b0415656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textComponent: {fileID: 784274680}
+  charsPerSecond: 20
 --- !u!1 &826993191
 GameObject:
   m_ObjectHideFlags: 0
@@ -1199,8 +1214,9 @@ MonoBehaviour:
   stencil1: {fileID: 264704285}
   stencil2: {fileID: 165997559}
   nextButton: {fileID: 401267404}
-  speechBallon: {fileID: 0}
+  speechBallon: {fileID: 2122927850}
   tattooButton: {fileID: 107861530}
+  typer: {fileID: 784274682}
 --- !u!224 &839806966
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1300,7 +1316,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!224 &883741203
 RectTransform:
@@ -2244,11 +2260,11 @@ RectTransform:
   - {fileID: 784274679}
   m_Father: {fileID: 883741203}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -120, y: 680}
-  m_SizeDelta: {x: -1560, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 637.995, y: -318.995}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 1}
 --- !u!114 &2122927852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2299,7 +2315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalFit: 0
+  m_HorizontalFit: 2
   m_VerticalFit: 2
 --- !u!114 &2122927855
 MonoBehaviour:
@@ -2314,16 +2330,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 77
-    m_Right: 42
-    m_Top: 62
-    m_Bottom: 39
+    m_Left: 40
+    m_Right: 40
+    m_Top: 55
+    m_Bottom: 35
   m_ChildAlignment: 4
   m_Spacing: 0
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 1
+  m_ChildControlWidth: 1
+  m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0

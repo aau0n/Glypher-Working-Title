@@ -13,6 +13,8 @@ public class MainScript : MonoBehaviour
     public static int timingBarSuccessCount = 0; // 타이밍 바 맞추기 결과 전달용 변수. 맞춘 타이밍 바 개수가 저장됨
     private bool tapBar1Success = false;
     private bool tapBar2Success = false;
+    public TextTyper typer; // Inspector에서 TextTyper 스크립트가 붙은 오브젝트 연결
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,6 +27,9 @@ public class MainScript : MonoBehaviour
         stencil1.SetActive(false); // 스텐실 붙이기
         stencil2.SetActive(false); // 스텐실 떼기
         nextButton.SetActive(false); // next 버튼
+
+        if (typer != null)
+        typer.StartTyping("나한테 도안을 추천해줄래?\n하나를 골라봐!"); // 초기 문장
 
         tattooButton.onClick.AddListener(OnTattooSelected);
 
@@ -71,6 +76,8 @@ public class MainScript : MonoBehaviour
     public void OnTattooSelected()
     {
         Debug.Log("타투 도안 선택됨");
+        if (typer != null)
+        typer.StartTyping("이제 타이밍에 맞게\n스페이스바(space)를 눌러봐!");
         ShowTapBar1();
     }
 
