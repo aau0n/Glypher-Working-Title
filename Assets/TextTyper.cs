@@ -18,16 +18,34 @@ public class TextTyper : MonoBehaviour
     private IEnumerator TypeText(string fullText)
     {
         textComponent.text = "";
-        int totalLength = fullText.Length;
-        int charIndex = 0;
+        int i = 0;
+        string currentText = "";
         float delay = 1f / charsPerSecond;
 
-        while (charIndex < totalLength)
+        while (i < fullText.Length)
         {
-            textComponent.text += fullText[charIndex];
-            charIndex++;
+            if (fullText[i] == '<') // 태그가 시작되면
+            {
+                int tagEnd = fullText.IndexOf('>', i);
+                if (tagEnd == -1)
+                {
+                    // 태그 닫힘이 없으면 그냥 종료 혹은 남은 문자 처리
+                    break;
+                }
+                // 태그 전체를 통째로 추가
+                currentText += fullText.Substring(i, tagEnd - i + 1);
+                i = tagEnd + 1;
+            }
+            else
+            {
+                currentText += fullText[i];
+                i++;
+            }
+
+            textComponent.text = currentText;
             yield return new WaitForSeconds(delay);
         }
+
         typingCoroutine = null;
     }
 
