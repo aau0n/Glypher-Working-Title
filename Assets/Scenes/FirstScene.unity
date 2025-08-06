@@ -566,7 +566,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amplitude: 0.07
-  frequency: 1.4
+  frequency: 1.8
 --- !u!212 &724480188
 SpriteRenderer:
   m_ObjectHideFlags: 0
