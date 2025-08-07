@@ -24,6 +24,9 @@ public class DissapointScript6_2 : MonoBehaviour
     public string nextSceneName = "7BridgeNight"; // 전환할 씬 이름
     private bool dialogueEnded = false;  // 마지막 문장 출력 끝났는지
     private bool readyToSwitch = false;  // endTriangleIndicator가 떴는지
+    public AudioSource audioSource;        // 효과음 재생용 AudioSource
+    public AudioClip typingSoundClip;      // 한 글자 출력시 재생할 효과음
+    public AudioClip sentenceEndSoundClip; // 텍스트 넘길 때 재생할 효과음
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -41,13 +44,20 @@ public class DissapointScript6_2 : MonoBehaviour
         // 문장 출력 후 클릭 대기
         if (waitingForClick && Input.GetMouseButtonDown(0))
         {
-            NextSentence();
+            StartCoroutine(NextSentence());
         }
         // 마지막 이미지가 뜬 상태에서 클릭하면 씬 전환
         if (readyToSwitch && Input.GetMouseButtonDown(0))
         {
-            SceneManager.LoadScene(nextSceneName);
+            StartCoroutine(LastSceneRoutine());
         }
+    }
+
+    IEnumerator LastSceneRoutine()
+    {
+        audioSource.PlayOneShot(sentenceEndSoundClip);
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene(nextSceneName);
     }
 
     void ShowCurrentSentence()
@@ -90,7 +100,10 @@ public class DissapointScript6_2 : MonoBehaviour
                         char nextChar = message[i + 1];
 
                         if (nextChar == 'n')
+                        {
                             currentText += '\n'; // 줄바꿈 문자
+                            yield return new WaitForSeconds(0.5f);
+                        }
                         else if (nextChar == 't')
                             currentText += '\t'; // 탭 문자 예시
 
@@ -113,6 +126,12 @@ public class DissapointScript6_2 : MonoBehaviour
 
             typer.textComponent.text = currentText; // TMP 텍스트에 현재까지 추가된 텍스트 반영
 
+            // 한 글자 출력 시 효과음 재생 (있으면)
+            if (audioSource != null && typingSoundClip != null)
+            {
+                audioSource.PlayOneShot(typingSoundClip);
+            }
+
             yield return new WaitForSeconds(delay); // 타이핑 속도만큼 기다림
         }
 
@@ -132,10 +151,18 @@ public class DissapointScript6_2 : MonoBehaviour
         }
     }
 
-    void NextSentence()
+    IEnumerator NextSentence()
     {
         waitingForClick = false;
         if (nextSentence != null) nextSentence.SetActive(false);
+
+        // 한 문장 끝났을 때 대사 넘김 효과음 재생
+        if (audioSource != null && sentenceEndSoundClip != null)
+        {
+            audioSource.PlayOneShot(sentenceEndSoundClip);
+            // StartCoroutine(Wait05fSec());
+            yield return new WaitForSeconds(0.5f);
+        }
 
         currSentence++;
 

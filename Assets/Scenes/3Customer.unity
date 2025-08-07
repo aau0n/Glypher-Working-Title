@@ -948,10 +948,12 @@ MonoBehaviour:
   customerNormal: {fileID: 542837330}
   customerSmile: {fileID: 628428392}
   typer: {fileID: 1572358853}
-  typingSpeed: 0.07
+  typingSpeed: 0.05
   txt_name: {fileID: 2144953198}
   doorEffectClip: {fileID: 8300000, guid: ba47ededc29024b38b09ca7d6d7c322a, type: 3}
   audioSource: {fileID: 502180748}
+  typingSoundClip: {fileID: 8300000, guid: 15174ec7b76d91043a65b8e19c5cb784, type: 3}
+  sentenceEndSoundClip: {fileID: 8300000, guid: 04e80335e9333074eb2a00f61ae22acb, type: 3}
   fadeDuration: 2
   sentences:
   - "\uC548\uB155! <color=#FF9900>\uAE00\uB9AC\uD53C\uC6B0\uC2A4</color>\uC5D0 \uC628
