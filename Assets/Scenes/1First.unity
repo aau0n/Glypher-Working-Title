@@ -831,8 +831,8 @@ MonoBehaviour:
   - 1
   - 1
   fadeOutScenes: 0e000000
-  fadeOutAfterSeconds: 15
-  fadeDuration: 3
+  fadeOutAfterSeconds: 12
+  fadeDuration: 0.3
 --- !u!4 &830887753
 Transform:
   m_ObjectHideFlags: 0
