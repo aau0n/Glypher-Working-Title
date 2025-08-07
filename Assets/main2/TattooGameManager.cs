@@ -37,18 +37,24 @@ public class TattooGameManager : MonoBehaviour
     private Vector2 defaultInkPosition2;
     private Vector2 defaultInkPosition3;
 
-    // 기준 색상 정의
-    private Color pink = new Color32(0xF5, 0x36, 0xE2, 0xFF);
-    private Color green = new Color32(0x70, 0xE7, 0x4E, 0xFF);
-    private Color blue = new Color32(0x60, 0x22, 0xF2, 0xFF);
+    private Color pink = new Color32(0xD0, 0x88, 0xDF, 0xFF);
+    private Color green = new Color32(0x7B, 0xE1, 0x96, 0xFF);
+    private Color blue = new Color32(0x76, 0x96, 0xDF, 0xFF);
+    private Color clear = new Color32(0x93, 0xBB, 0xCD, 0xFF);
 
-    public TextTyper typer; // Inspector에서 TextTyper 스크립트가 붙은 오브젝트 연결
+    public TextTyper typer;
+
+    // 타이머 및 게임 종료 상태 변수 추가
+    private float timeLimit = 80f; // 제한시간 80초
+    private float elapsedTime = 0f;
+    private bool isGameFinished = false;
 
     void Start()
     {
         defaultInkPosition1 = ink1.rectTransform.anchoredPosition;
         defaultInkPosition2 = ink2.rectTransform.anchoredPosition;
         defaultInkPosition3 = ink3.rectTransform.anchoredPosition;
+        StartCoroutine(ShowDialogueSequence());
 
         CreateGrid();
         ExtractCorrectPattern();
@@ -57,6 +63,21 @@ public class TattooGameManager : MonoBehaviour
 
     void Update()
     {
+        if (isGameFinished)
+            return; // 게임 종료 시 입력 및 시간 업데이트 중단
+
+        elapsedTime += Time.deltaTime;
+
+        if (elapsedTime > timeLimit)
+        {
+            Debug.Log("[시간 초과] 80초 내에 완료하지 못해 점수 0 처리");
+            ScoreManager.score = 0;
+            ScoreManager.total = 100;
+            isGameFinished = true;
+            // 필요 시 게임 종료 후 처리 추가 가능
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.A))
         {
             selectedPrefab = tileGreenPrefab;
@@ -93,7 +114,6 @@ public class TattooGameManager : MonoBehaviour
 
     void HighlightInk(Image inkImage, Sprite poppedSprite)
     {
-        // 원래대로 초기화
         ink1.sprite = inkBasicGreen;
         ink2.sprite = inkBasicPink;
         ink3.sprite = inkBasicBlue;
@@ -106,7 +126,6 @@ public class TattooGameManager : MonoBehaviour
         ink2.rectTransform.anchoredPosition = defaultInkPosition2;
         ink3.rectTransform.anchoredPosition = defaultInkPosition3;
 
-        // 선택된 잉크 강조
         inkImage.sprite = poppedSprite;
         Vector2 poppedSize = new Vector2(138, 242);
         inkImage.rectTransform.sizeDelta = poppedSize;
@@ -150,8 +169,6 @@ public class TattooGameManager : MonoBehaviour
 
                 Color pixelColor = tex.GetPixel(px, py);
                 correctPattern[x, y] = ClassifyColor(pixelColor);
-
-                // Debug.Log($"[패턴] ({x},{y}) 픽셀: {pixelColor} → 분류: {correctPattern[x, y]}");
             }
         }
     }
@@ -193,6 +210,7 @@ public class TattooGameManager : MonoBehaviour
             UnhighlightCurrentTile();
             Debug.Log("완료! 점수 계산 ㄱㄱ");
             CalculateScore();
+            isGameFinished = true;
             return;
         }
 
@@ -217,7 +235,7 @@ public class TattooGameManager : MonoBehaviour
         if (cursor != null)
         {
             cursor.SetParent(tiles[currentX, currentY].transform, false);
-            cursor.anchoredPosition = Vector2.zero;
+            cursor.anchoredPosition = new Vector2(0, 10);
         }
     }
 
@@ -230,60 +248,52 @@ public class TattooGameManager : MonoBehaviour
     void CalculateScore()
     {
         int score = 0;
-        int total = 0;
+        int total = 100;
 
-        for (int y = 0; y < 10; y++)
+        for (int y = 9; y > -1; y--)
         {
             for (int x = 0; x < 10; x++)
             {
-                if (y < currentY || (y == currentY && x < currentX))
-                {
-                    Color correct = correctPattern[x, y];
-                    Color user = userInput[x, y];
+                Color correct = correctPattern[x, y];
+                Color user = userInput[x, y];
 
-                    if (IsTransparent(correct))
-                    {
-                        if (user == Color.clear)
-                        {
-                            score++;
-                        }
-                        else
-                        {
-                            Debug.Log($"[오답] ({x},{y})는 비워야 했는데 칠함 → 사용자 색: {user}");
-                        }
-                    }
-                    else
-                    {
-                        if (AreColorsSimilar(correct, user))
-                        {
-                            score++;
-                        }
-                        else
-                        {
-                            Debug.Log($"[오답] ({x},{y}) 색 다름 → 정답: {correct}, 사용자: {user}");
-                        }
-                    }
-                    total++;
+                if (AreColorsSimilar(correct, clear))
+                {
+                    if (user == Color.clear)
+                        score++;
                 }
-                // 그 외 칸들은 점수 계산 안함
+                else
+                {
+                    if (AreColorsSimilar(correct, user))
+                        score++;
+                }
             }
         }
 
-        int maxTotal = 10 * 10; // 100칸 고정
-
         ScoreManager.score = score;
-        ScoreManager.total = maxTotal;
+        ScoreManager.total = total;
 
-        float percentage = ((float)score / maxTotal) * 100f;
+        float percentage = ((float)score / total) * 100f;
 
-        Debug.Log($"[최종 점수] {score}/{maxTotal} ({percentage:F1}%)");
-
+        Debug.Log($"[최종 점수] {score}/{total} ({percentage:F1}%)");
     }
 
+    private IEnumerator ShowDialogueSequence()
+    {
+        yield return new WaitForSeconds(1f);
+
+        if (typer != null)
+            typer.StartTyping("A,S,D로 잉크색을 바꾸고,\n좌클릭으로 새기기,\n스페이스바로 넘어가기!");
+
+        yield return new WaitForSeconds(5f);
+
+        if (typer != null)
+            typer.StartTyping("좋아. 잘 하고 있어!");
+    }
 
     bool IsTransparent(Color color)
     {
-        return color.a < 0.1f || color == Color.clear;
+        return AreColorsSimilar(color, clear);
     }
 
     bool AreColorsSimilar(Color a, Color b, float threshold = 0.1f)
@@ -298,7 +308,7 @@ public class TattooGameManager : MonoBehaviour
         if (AreColorsSimilar(pixel, pink)) return pink;
         if (AreColorsSimilar(pixel, green)) return green;
         if (AreColorsSimilar(pixel, blue)) return blue;
-
+        if (AreColorsSimilar(pixel, clear)) return clear;
         return Color.clear;
     }
 }
