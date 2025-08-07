@@ -869,7 +869,7 @@ MonoBehaviour:
   toNextScene: {fileID: 2146459243}
   nextSceneName: 6_4Mutual
   audioSource: {fileID: 34636163}
-  typingSoundClip: {fileID: 8300000, guid: 15174ec7b76d91043a65b8e19c5cb784, type: 3}
+  typingSoundClip: {fileID: 8300000, guid: 18e1f4e7b72cd834ea06864889dadd2f, type: 3}
   sentenceEndSoundClip: {fileID: 8300000, guid: 04e80335e9333074eb2a00f61ae22acb, type: 3}
 --- !u!4 &792103538
 Transform:
