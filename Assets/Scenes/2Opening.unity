@@ -1181,9 +1181,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueText: {fileID: 1889133311}
-  typingSpeed: 0.05
+  typingSpeed: 0.07
   audioSource: {fileID: 847026464}
-  typingSoundClip: {fileID: 8300000, guid: 541a10aafccdef0429678ffca62c7854, type: 3}
+  typingSoundClip: {fileID: 8300000, guid: 8ed16152882167d43b04b9e16af3792f, type: 3}
   sentenceEndSoundClip: {fileID: 8300000, guid: 04e80335e9333074eb2a00f61ae22acb, type: 3}
   sentences:
   - "2500\uB144, \uC9C0\uAD6C\uB294 \uB354\uC774\uC0C1 \uC0B4 \uC218 \uC5C6\uB294

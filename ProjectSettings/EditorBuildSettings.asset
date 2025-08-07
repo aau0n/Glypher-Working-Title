@@ -30,17 +30,29 @@ EditorBuildSettings:
     path: Assets/Scenes/6_3Fail.unity
     guid: 9d1a2a4d07df8c24195bdc4732d6165b
   - enabled: 1
-    path: Assets/Scenes/6_4Mutual.unity
-    guid: 89647a10131294045a0865a8531ac7e1
+    path: Assets/Scenes/8Night.unity
+    guid: 65f66bb1fdb1df847b0d7bf568d88af8
   - enabled: 1
     path: Assets/Scenes/7BridgeNight.unity
     guid: 49ee614858a03ac45b8ad336e6120702
   - enabled: 1
-    path: Assets/Scenes/8Night.unity
-    guid: 65f66bb1fdb1df847b0d7bf568d88af8
+    path: Assets/Scenes/7_2Bridge.unity
+    guid: 50723f59ce2078d47ab45a7bb1d4438c
+  - enabled: 1
+    path: Assets/Scenes/7_3Bridge.unity
+    guid: ae19d2982dc82c841a87a34f520bae03
   - enabled: 1
     path: Assets/Scenes/9Sleep.unity
     guid: e1dd48bc579d9f94690ab362c93c2eb2
+  - enabled: 1
+    path: Assets/Scenes/6_4Mutual.unity
+    guid: 89647a10131294045a0865a8531ac7e1
+  - enabled: 1
+    path: Assets/Scenes/6_4_2Mutual.unity
+    guid: abd3fc437ad808e42bd645ba14e88bee
+  - enabled: 1
+    path: Assets/Scenes/6_4_3Mutual.unity
+    guid: 4864e4731efd6414fa9b900f355eda3b
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
