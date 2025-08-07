@@ -632,7 +632,7 @@ MonoBehaviour:
   tileGreenPrefab: {fileID: 4071395112252391469, guid: a78affd92d655ef44b43b451fe5e6b98, type: 3}
   tileBluePrefab: {fileID: 1686370359013518746, guid: 1df085a47c9b0be4496b3dc44ba292c6, type: 3}
   gridParent: {fileID: 2034195714}
-  backgroundPattern: {fileID: 1972731283}
+  BackTattooPattern: {fileID: 669377863}
   cursor: {fileID: 1850547433}
   ink1: {fileID: 1392512549}
   ink2: {fileID: 450514252}
