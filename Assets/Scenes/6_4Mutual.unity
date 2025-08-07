@@ -164,11 +164,10 @@ MonoBehaviour:
     \uACBD\uBE44\uB3C4 \uC0BC\uC5C4\uD574\uC9C4 \uAC83 \uAC19\uB354\uB77C\uACE0.\\n\uC8FC\uC758\uD558\uB294
     \uAC8C \uC88B\uC744 \uAC70\uC57C."
   - "\uAE00\uB9AC\uD37C, \uB124\uAC00 \uC640\uC11C \uAE30\uC058\uB2E4.\\n\uC54C\uB2E4\uC2DC\uD53C
-    \uC774\uACF3\uC5D0 \uC788\uB294 <color=#FF9900>\uBA38\uBA54\uC774\uB4DC</color>\uC758
-    \uC218\uB294 \uB9CE\uC9C0 \uC54A\uAC70\uB4E0."
+    \uC774\uACF3\uC5D0 \uC788\uB294 <color=#FF9900>\uC778\uAC04</color>\uC758 \uC218\uB294
+    \uB9CE\uC9C0 \uC54A\uAC70\uB4E0."
   - "\uB124\uAC00 \uCC98\uC74C \uC654\uC744 \uB54C, \uB098\uB791 \uBE44\uC2B7\uD558\uAC8C
-    \uC0DD\uACA8\uC11C \uBB34\uCC99 \uB180\uB790\uC5B4.\\n\uB108\uB294 \uBD84\uBA85
-    <color=#FF9900>\uC778\uAC04</color>\uC774\uB77C\uACE0 \uD588\uC9C0?"
+    \uC0DD\uACA8\uC11C \uBB34\uCC99 \uB180\uB790\uC5B4."
   - "<color=#FF9900>\uAE00\uB9AC\uD53C\uC6B0\uC2A4</color>\uC5D0\uB294 \uBB34\uCC99
     \uB2E4\uC591\uD55C \uC885\uC871\uB4E4\uC774 \uC788\uC5B4\uC11C,\\n\uB124\uAC8C
     \uB9DE\uB294 \uC2DC\uC124\uB3C4 \uC5BC\uB9C8 \uC5C6\uC744\uAC70\uC57C."
@@ -184,7 +183,7 @@ MonoBehaviour:
   toNextScene: {fileID: 810947295}
   nextSceneName: 7BridgeNight
   audioSource: {fileID: 867377537}
-  typingSoundClip: {fileID: 8300000, guid: 15174ec7b76d91043a65b8e19c5cb784, type: 3}
+  typingSoundClip: {fileID: 8300000, guid: 18e1f4e7b72cd834ea06864889dadd2f, type: 3}
   sentenceEndSoundClip: {fileID: 8300000, guid: 04e80335e9333074eb2a00f61ae22acb, type: 3}
 --- !u!4 &460097019
 Transform:

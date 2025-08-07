@@ -8,9 +8,11 @@ public class Typing : MonoBehaviour
     public TMP_Text dialogueText;   // Inspector에서 TextMeshPro 오브젝트 할당
     public float typingSpeed = 0.05f; // 한 글자 나오는 시간 간격
 
-    public AudioSource audioSource;        // 효과음 재생용 AudioSource
+    public AudioSource audioSourceTyping;        // 타이핑 효과음 재생용 AudioSource
+    public AudioSource audioSourceEnd;           // 텍스트 넘길 때 효과음 재생용 AudioSource
     public AudioClip typingSoundClip;      // 한 글자 출력시 재생할 효과음
     public AudioClip sentenceEndSoundClip; // 텍스트 넘길 때 재생할 효과음
+    public float endSoundVolume = 0.8f;    // 텍스트 넘길 때 효과음 볼륨
 
     // 미리 넣어둘 문장 배열
     public string[] sentences =
@@ -47,6 +49,7 @@ public class Typing : MonoBehaviour
         if (endTriangleIndicator != null) endTriangleIndicator.SetActive(false);
         if (op2 != null) op2.SetActive(false);
         if (op3 != null) op3.SetActive(false);
+        audioSourceEnd.volume = endSoundVolume; // 텍스트 넘길 때 효과음 크기 조절
         ShowCurrentSentence();
     }
 
@@ -61,7 +64,8 @@ public class Typing : MonoBehaviour
         // 마지막 이미지가 뜬 상태에서 클릭하면 씬 전환
         if (readyToSwitch && Input.GetMouseButtonDown(0))
         {
-            SceneManager.LoadScene(nextSceneName);
+            StartCoroutine(DelayChangeScene(nextSceneName));
+            // SceneManager.LoadScene(nextSceneName);
         }
     }
 
@@ -81,9 +85,9 @@ public class Typing : MonoBehaviour
         foreach (char c in message)
         {
             // 한 글자 출력 시 효과음 재생 (있으면)
-            if (audioSource != null && typingSoundClip != null)
+            if (audioSourceTyping != null && typingSoundClip != null)
             {
-                audioSource.PlayOneShot(typingSoundClip);
+                audioSourceTyping.PlayOneShot(typingSoundClip);
             }
 
             dialogueText.text += c;
@@ -113,9 +117,9 @@ public class Typing : MonoBehaviour
         if (triangleIndicator != null) triangleIndicator.SetActive(false);
 
         // 한 문장 끝났을 때 대사 넘김 효과음 재생
-        if (audioSource != null && sentenceEndSoundClip != null)
+        if (audioSourceEnd != null && sentenceEndSoundClip != null)
         {
-            audioSource.PlayOneShot(sentenceEndSoundClip);
+            audioSourceEnd.PlayOneShot(sentenceEndSoundClip);
             yield return new WaitForSeconds(0.5f);
         }
 
@@ -140,5 +144,15 @@ public class Typing : MonoBehaviour
         readyToSwitch = true; // 이제 클릭하면 씬 전환!
 
         yield return null; // 클릭 대기는 Update()에서 처리
+    }
+
+    IEnumerator DelayChangeScene(string nextSceneName)
+    {
+        if (audioSourceEnd != null && sentenceEndSoundClip != null)
+        {
+            audioSourceEnd.PlayOneShot(sentenceEndSoundClip);
+            yield return new WaitForSeconds(0.5f);
+            SceneManager.LoadScene(nextSceneName);
+        }
     }
 }

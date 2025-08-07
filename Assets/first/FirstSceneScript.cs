@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using System.Collections;
 
 
 public class FirstSceneScript : MonoBehaviour
@@ -8,6 +10,9 @@ public class FirstSceneScript : MonoBehaviour
     public GameObject[] buttonObjects;      // 버튼 스프라이트 3개 오브젝트
     public GameObject[] hoverImages;        // 하이라이트 이미지 3개 (Hierarchy에 미리 배치)
     private int currentIndex = -1;
+
+    public AudioSource audioSource;     // 효과음 재생용 AudioSource
+    public AudioClip selectButton;    // 버튼 클릭시 재생할 효과음
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -49,25 +54,34 @@ public class FirstSceneScript : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 Debug.Log($"버튼 {spriteIdx + 1} 클릭됨!");
-                
+
                 // 버튼별로 원하는 동작 구현 가능
                 switch (spriteIdx)
                 {
                     case 0: // 새 게임
-                        SceneManager.LoadScene("2Opening");
+                        if (audioSource != null && selectButton != null)
+                        {
+                            audioSource.PlayOneShot(selectButton);
+                        }
+                        StartCoroutine(LoadSceneWithDelay("2Opening", 1f));
                         break;
                     case 1: // 이어하기
                         // SceneManager.LoadScene("ContinueScene");
                         break;
                     case 2: // 나가기 (예: 앱 종료)
+                        if (audioSource != null && selectButton != null)
+                            {
+                                audioSource.PlayOneShot(selectButton);
+                            }
+                            StartCoroutine(Delay());
 #if UNITY_EDITOR
                             UnityEditor.EditorApplication.isPlaying = false;
 #else
                         Application.Quit();
 #endif
                         break;
-                }  
-    
+                }
+
             }
         }
         else
@@ -89,5 +103,16 @@ public class FirstSceneScript : MonoBehaviour
             hoverImages[currentIndex].SetActive(false);
             currentIndex = -1;
         }
+    }
+    
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(1f);
+    }
+
+    IEnumerator LoadSceneWithDelay(string sceneName, float delaySeconds)
+    {
+        yield return new WaitForSeconds(delaySeconds);
+        SceneManager.LoadScene(sceneName);
     }
 }

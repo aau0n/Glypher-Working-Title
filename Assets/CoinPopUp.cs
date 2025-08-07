@@ -10,6 +10,9 @@ public class CoinPopUp : MonoBehaviour
     public float moveUpDistance = 100f;
     public float duration = 1f;
 
+    public AudioClip coinSound;  // 🔊 Inspector에서 넣을 사운드
+    private AudioSource audioSource;
+
     private RectTransform rt;
     private CanvasGroup cg;
 
@@ -21,6 +24,10 @@ public class CoinPopUp : MonoBehaviour
         if (cg == null)
             cg = gameObject.AddComponent<CanvasGroup>();
 
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+
         cg.alpha = 0f;
 
         StartCoroutine(AnimateCoin());
@@ -29,6 +36,10 @@ public class CoinPopUp : MonoBehaviour
     IEnumerator AnimateCoin()
     {
         yield return new WaitForSeconds(delay);
+
+        // 🔊 효과음 재생 (딱 한 번)
+        if (coinSound != null)
+            audioSource.PlayOneShot(coinSound);
 
         Vector3 startPos = rt.anchoredPosition;
         Vector3 endPos = startPos + new Vector3(0, moveUpDistance, 0);

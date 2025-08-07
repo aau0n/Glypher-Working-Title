@@ -61,15 +61,15 @@ public class tapbar1 : MonoBehaviour
     {
         float barY = bar.anchoredPosition.y;
         bool isCorrect = (barY >= correctZoneMinY && barY <= correctZoneMaxY);
-        
+
         if (isCorrect)
         {
-            Debug.Log("정답 영역에서 멈춤");
+            Debug.Log("TB1 정답 영역에서 멈춤");
             // 점수 처리
         }
         else
         {
-            Debug.Log("정답 영역에서 멈추지 않음");
+            Debug.Log("TB1 정답 영역에서 멈추지 않음");
             // 점수 처리
         }
 
