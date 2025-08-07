@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class TattooGameManager : MonoBehaviour
 {
+    public List<Color> colors;
+
     public GameObject tilePinkPrefab;
     public GameObject tileGreenPrefab;
     public GameObject tileBluePrefab;
@@ -29,7 +31,7 @@ public class TattooGameManager : MonoBehaviour
     private Color[,] userInput = new Color[10, 10];
 
     private int currentX = 0;
-    private int currentY = 9;
+    private int currentY = 0;
     private GameObject selectedPrefab = null;
 
     private Vector2 gridOrigin = new Vector2(0f, 0f);
@@ -38,9 +40,10 @@ public class TattooGameManager : MonoBehaviour
     private Vector2 defaultInkPosition2;
     private Vector2 defaultInkPosition3;
 
-    private Color pink = new Color32(0xD0, 0x88, 0xDF, 0xFF);
-    private Color green = new Color32(0x7B, 0xE1, 0x96, 0xFF);
-    private Color blue = new Color32(0x76, 0x96, 0xDF, 0xFF);
+    private Color green = new Color(0.353f, 1.000f, 0.000f, 0.502f); // 연두색
+    private Color blue = new Color(0.278f, 0.522f, 0.827f, 0.502f);  // 파란색
+    private Color pink = new Color(1.000f, 0.000f, 0.937f, 0.502f);  // 핑크색
+
 
 
 
@@ -158,6 +161,7 @@ public class TattooGameManager : MonoBehaviour
         }
     }
 
+
     void ExtractCorrectPattern()
     {
         Texture2D tex = Back_tattoo.sprite.texture;
@@ -166,15 +170,26 @@ public class TattooGameManager : MonoBehaviour
         {
             for (int x = 0; x < 10; x++)
             {
-                int px = x * 72 + 36;
-                int py = y * 72 + 36;
+                int px = x * 72 + 36 + 1045;
+                int py = y * 72 + 36 + 155;
 
                 Color pixelColor = tex.GetPixel(px, py);
+                Color classified = ClassifyColor(pixelColor);
 
-                correctPattern[x, y] = ClassifyColor(pixelColor);
+                correctPattern[x, y] = classified;
+
+                // 콘솔 출력 추가
+                string colorName = "Unknown";
+                if (AreColorsSimilar(classified, pink)) colorName = "Pink";
+                else if (AreColorsSimilar(classified, green)) colorName = "Green";
+                else if (AreColorsSimilar(classified, blue)) colorName = "Blue";
+                else if (IsTransparent(classified)) colorName = "Transparent";
+
+                Debug.Log($"[패턴 추출] 좌표 ({x},{y}) → 원본 색: {pixelColor} → 분류된 색: {colorName}");
             }
         }
     }
+
 
     bool IsTransparent(Color color)
     {
@@ -231,7 +246,7 @@ public class TattooGameManager : MonoBehaviour
 
     void MoveNext()
     {
-        if (currentX == 9 && currentY == 0)
+        if (currentX == 9 && currentY == 9)
         {
             UnhighlightCurrentTile();
             Debug.Log("완료! 점수 계산 ㄱㄱ");
@@ -247,7 +262,7 @@ public class TattooGameManager : MonoBehaviour
         if (currentX >= 10)
         {
             currentX = 0;
-            currentY--;
+            currentY++;
         }
 
         HighlightCurrentTile();
@@ -287,22 +302,22 @@ public class TattooGameManager : MonoBehaviour
         int score = 0;
         int total = 0;
 
-        for (int y = 9; y >= 0; y--)
+        for (int y = 0; y < 10; y++)
         {
             for (int x = 0; x < 10; x++)
             {
-                if (y > currentY)
+                if (y < currentY)
                 {
-                    // 지나간 윗줄 포함
+                    // 이미 지난 아랫줄
                 }
                 else if (y == currentY)
                 {
                     if (x > currentX)
-                        continue; // 아직 안 지난 칸
+                        continue;
                 }
                 else
                 {
-                    continue; // 아직 도달 안 한 아래 줄
+                    continue;
                 }
 
                 Color correct = correctPattern[x, y];
@@ -334,8 +349,8 @@ public class TattooGameManager : MonoBehaviour
         {
             typer.StartTyping("좋아. 잘 하고 있어!");
         }
-
     }
 
 
-}
+
+}
