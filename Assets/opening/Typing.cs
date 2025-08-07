@@ -8,6 +8,10 @@ public class Typing : MonoBehaviour
     public TMP_Text dialogueText;   // Inspector에서 TextMeshPro 오브젝트 할당
     public float typingSpeed = 0.05f; // 한 글자 나오는 시간 간격
 
+    public AudioSource audioSource;        // 효과음 재생용 AudioSource
+    public AudioClip typingSoundClip;      // 한 글자 출력시 재생할 효과음
+    public AudioClip sentenceEndSoundClip; // 텍스트 넘길 때 재생할 효과음
+
     // 미리 넣어둘 문장 배열
     public string[] sentences =
     {
@@ -52,7 +56,7 @@ public class Typing : MonoBehaviour
         // 문장 출력 후 클릭 대기
         if (waitingForClick && Input.GetMouseButtonDown(0))
         {
-            NextSentence();
+            StartCoroutine(NextSentence());
         }
         // 마지막 이미지가 뜬 상태에서 클릭하면 씬 전환
         if (readyToSwitch && Input.GetMouseButtonDown(0))
@@ -77,6 +81,13 @@ public class Typing : MonoBehaviour
         foreach (char c in message)
         {
             dialogueText.text += c;
+
+            // 한 글자 출력 시 효과음 재생 (있으면)
+            if (audioSource != null && typingSoundClip != null)
+            {
+                audioSource.PlayOneShot(typingSoundClip);
+            }
+
             yield return new WaitForSeconds(typingSpeed);
         }
 
@@ -96,10 +107,17 @@ public class Typing : MonoBehaviour
         }
     }
 
-    void NextSentence()
+    IEnumerator NextSentence()
     {
         waitingForClick = false;
         if (triangleIndicator != null) triangleIndicator.SetActive(false);
+
+        // 한 문장 끝났을 때 대사 넘김 효과음 재생
+        if (audioSource != null && sentenceEndSoundClip != null)
+        {
+            audioSource.PlayOneShot(sentenceEndSoundClip);
+            yield return new WaitForSeconds(0.5f);
+        }
 
         currSentence++;
 

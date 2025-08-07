@@ -13,6 +13,10 @@ public class CustomerScript : MonoBehaviour
     public TMP_Text txt_name; // 손님 이름 TMP 텍스트
     public AudioClip doorEffectClip; // 문이 여닫히는 효과음
     public AudioSource audioSource;
+
+    public AudioClip typingSoundClip;      // 한 글자 출력시 재생할 효과음
+    public AudioClip sentenceEndSoundClip; // 텍스트 넘길 때 재생할 효과음
+
     public float fadeDuration = 3f; // 손님이 서서히 등장하는 시간(초)
 
     // 미리 넣어둘 문장 배열
@@ -30,7 +34,7 @@ public class CustomerScript : MonoBehaviour
     public GameObject nextSentence;        // V (다음 대화로) 오브젝트
     public GameObject toNextScene;     // >>NEXT (다음 씬으로) 오브젝트
     public string nextSceneName = "4Stencil"; // 전환할 씬 이름
-    private bool dialogueEnded = false;  // di마지막 문장 출력 끝났는지
+    private bool dialogueEnded = false;  // 마지막 문장 출력 끝났는지
     private bool readyToSwitch = false;  // endTriangleIndicator가 떴는지
 
     // Object 언제 등장시킬지 인덱스 (0부터 시작)
@@ -133,13 +137,24 @@ public class CustomerScript : MonoBehaviour
         // 문장 출력 후 클릭 대기
         if (waitingForClick && Input.GetMouseButtonDown(0))
         {
-            NextSentence();
+            if (!isTyping) // 타이핑 도중이 아닐 때만 실행
+            {
+                waitingForClick = false; // 클릭 대기 해제
+                StartCoroutine(NextSentence());
+            }
         }
         // 마지막 이미지가 뜬 상태에서 클릭하면 씬 전환
         if (readyToSwitch && Input.GetMouseButtonDown(0))
         {
-            SceneManager.LoadScene(nextSceneName);
+            StartCoroutine(LastSceneRoutine());
         }
+    }
+
+    IEnumerator LastSceneRoutine()
+    {
+        audioSource.PlayOneShot(sentenceEndSoundClip);
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene(nextSceneName);
     }
     
     void ShowCurrentSentence()
@@ -190,7 +205,10 @@ public class CustomerScript : MonoBehaviour
                         char nextChar = message[i + 1];
 
                         if (nextChar == 'n')
+                        {
                             currentText += '\n'; // 줄바꿈 문자
+                            yield return new WaitForSeconds(0.5f);
+                        }
                         else if (nextChar == 't')
                             currentText += '\t'; // 탭 문자 예시
 
@@ -213,6 +231,12 @@ public class CustomerScript : MonoBehaviour
 
             typer.textComponent.text = currentText; // TMP 텍스트에 현재까지 추가된 텍스트 반영
 
+            // 한 글자 출력 시 효과음 재생 (있으면)
+            if (audioSource != null && typingSoundClip != null)
+            {
+                audioSource.PlayOneShot(typingSoundClip);
+            }
+
             yield return new WaitForSeconds(delay); // 타이핑 속도만큼 기다림
         }
 
@@ -232,10 +256,18 @@ public class CustomerScript : MonoBehaviour
         }
     }
 
-    void NextSentence()
+    IEnumerator NextSentence()
     {
         waitingForClick = false;
         if (nextSentence != null) nextSentence.SetActive(false);
+
+        // 한 문장 끝났을 때 대사 넘김 효과음 재생
+        if (audioSource != null && sentenceEndSoundClip != null)
+        {
+            audioSource.PlayOneShot(sentenceEndSoundClip);
+            // StartCoroutine(Wait05fSec());
+            yield return new WaitForSeconds(0.5f);
+        }
 
         currSentence++;
 
