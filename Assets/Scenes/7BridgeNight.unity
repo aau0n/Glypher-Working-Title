@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 180787929}
   - component: {fileID: 180787932}
   - component: {fileID: 180787933}
+  - component: {fileID: 180787934}
   m_Layer: 5
   m_Name: Button2
   m_TagString: Untagged
@@ -279,6 +280,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeLoader: {fileID: 1946806832}
   sceneToLoad: 8Night
+--- !u!225 &180787934
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180787927}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &394008123
 GameObject:
   m_ObjectHideFlags: 0
@@ -461,6 +474,7 @@ GameObject:
   - component: {fileID: 633361980}
   - component: {fileID: 633361983}
   - component: {fileID: 633361984}
+  - component: {fileID: 633361985}
   m_Layer: 5
   m_Name: Button1
   m_TagString: Untagged
@@ -607,6 +621,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeLoader: {fileID: 1946806832}
   sceneToLoad: 8Night
+--- !u!225 &633361985
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 633361978}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &714800927
 GameObject:
   m_ObjectHideFlags: 0
