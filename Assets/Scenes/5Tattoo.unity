@@ -153,7 +153,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -200, y: -150}
+  m_AnchoredPosition: {x: -250, y: -150}
   m_SizeDelta: {x: 187, y: 78}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &199237889
@@ -492,7 +492,7 @@ GameObject:
   - component: {fileID: 603278473}
   - component: {fileID: 603278476}
   m_Layer: 5
-  m_Name: "Button_\uC784\uC2DC"
+  m_Name: NextButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -719,6 +719,10 @@ MonoBehaviour:
   inkBasicGreen: {fileID: 2165280935660055903, guid: c947f5bb52e3ad740b1c17b304635be0, type: 3}
   inkBasicPink: {fileID: 1728871321806063852, guid: c947f5bb52e3ad740b1c17b304635be0, type: 3}
   inkBasicBlue: {fileID: -3475506208236823983, guid: c947f5bb52e3ad740b1c17b304635be0, type: 3}
+  goodImage: {fileID: 199237887}
+  perfectImage: {fileID: 1599697111}
+  missImage: {fileID: 1706627297}
+  nextButton: {fileID: 603278471}
   typer: {fileID: 1102154572}
 --- !u!1 &648343285
 GameObject:
@@ -2435,7 +2439,7 @@ GameObject:
   - component: {fileID: 1706627300}
   - component: {fileID: 1706627299}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Miss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
