@@ -80,13 +80,13 @@ public class Typing : MonoBehaviour
 
         foreach (char c in message)
         {
-            dialogueText.text += c;
-
             // 한 글자 출력 시 효과음 재생 (있으면)
             if (audioSource != null && typingSoundClip != null)
             {
                 audioSource.PlayOneShot(typingSoundClip);
             }
+
+            dialogueText.text += c;
 
             yield return new WaitForSeconds(typingSpeed);
         }
