@@ -67,12 +67,12 @@ public class tapbar2 : MonoBehaviour
 
         if (isCorrect)
         {
-            Debug.Log("정답 영역에서 멈춤");
+            Debug.Log("TB2 정답 영역에서 멈춤");
             // 점수 처리
         }
         else
         {
-            Debug.Log("정답 영역에서 멈추지 않음");
+            Debug.Log("TB2 정답 영역에서 멈추지 않음");
             // 점수 처리
         }
 
