@@ -53,15 +53,23 @@ public class BGMPlayer : MonoBehaviour
 
         AudioClip nextClip = bgmClips[clipIdx];
 
-        // 만약 다른 곡이면 페이드 효과 적용해 교체
-        if (currentClip != nextClip)
-        {
-            if (fadeCoroutine != null)
-                StopCoroutine(fadeCoroutine);
+        if (currentClip == null)
+    {
+        // 처음 시작하는 노래 - 페이드 없이 바로 재생
+        audioSource.clip = nextClip;
+        audioSource.volume = 1f;   // 원하는 기본 볼륨 설정
+        audioSource.Play();
+        currentClip = nextClip;
+    }
+    else if (currentClip != nextClip)
+    {
+        // 이미 다른 곡이 재생 중이면 페이드 효과 적용
+        if (fadeCoroutine != null)
+            StopCoroutine(fadeCoroutine);
 
-            fadeCoroutine = StartCoroutine(FadeOutIn(nextClip));
-        }
-        // 같으면 아무 작업 안 함
+        fadeCoroutine = StartCoroutine(FadeOutIn(nextClip));
+    }
+    // 같으면 아무 작업 안 함
     }
 
     private IEnumerator FadeOutIn(AudioClip nextClip)
