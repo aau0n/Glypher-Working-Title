@@ -960,10 +960,9 @@ MonoBehaviour:
     \uCC38 \uBE60\uB974\uB2E4.\\n\uB124\uAC00 \uB4F1\uC7A5\uD588\uC744 \uB54C \uBAA8\uB450\uAC00
     \uC5BC\uB9C8\uB098 \uB180\uB790\uB294\uC9C0 \uBAB0\uB77C!\\n\uD558\uB298\uC5D0\uC11C
     \uAC11\uC790\uAE30 \uB5A8\uC5B4\uC9C4 \uC774\uBC29\uC778\uC774\uC5C8\uC796\uC544."
-  - "\uC5B4\uCA0C\uB4E0 \uC624\uB298\uBD80\uD130 \uB108\uB3C4 \uAE00\uB9AC\uD37C\uB124!
-    \uB108\uC758 \uCE5C\uAD6C\uB85C\uC11C \uC774\uAC83\uC800\uAC83 \uC54C\uB824\uC8FC\uB7EC
-    \uC654\uC5B4.\\n\uADF8\uB7FC \uC2E4\uB825\uC774 \uC5B4\uB5A4\uC9C0 \uD55C\uBC88
-    \uBCFC\uAE4C?"
+  - "\uC5B4\uCA0C\uB4E0 \uC624\uB298\uBD80\uD130 \uB108\uB3C4 \uAE00\uB9AC\uD37C\uB124!\\n\uB108\uC758
+    \uCE5C\uAD6C\uB85C\uC11C \uC774\uAC83\uC800\uAC83 \uC54C\uB824\uC8FC\uB7EC \uC654\uC5B4.\\n\uADF8\uB7FC
+    \uC2E4\uB825\uC774 \uC5B4\uB5A4\uC9C0 \uD55C\uBC88 \uBCFC\uAE4C?"
   nextSentence: {fileID: 12995247}
   toNextScene: {fileID: 1689629746}
   nextSceneName: 4Stencil
@@ -1173,8 +1172,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1185,7 +1184,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 18
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
