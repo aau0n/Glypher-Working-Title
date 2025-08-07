@@ -64,7 +64,8 @@ public class Typing : MonoBehaviour
         // 마지막 이미지가 뜬 상태에서 클릭하면 씬 전환
         if (readyToSwitch && Input.GetMouseButtonDown(0))
         {
-            SceneManager.LoadScene(nextSceneName);
+            StartCoroutine(DelayChangeScene(nextSceneName));
+            // SceneManager.LoadScene(nextSceneName);
         }
     }
 
@@ -143,5 +144,15 @@ public class Typing : MonoBehaviour
         readyToSwitch = true; // 이제 클릭하면 씬 전환!
 
         yield return null; // 클릭 대기는 Update()에서 처리
+    }
+
+    IEnumerator DelayChangeScene(string nextSceneName)
+    {
+        if (audioSourceEnd != null && sentenceEndSoundClip != null)
+        {
+            audioSourceEnd.PlayOneShot(sentenceEndSoundClip);
+            yield return new WaitForSeconds(0.5f);
+            SceneManager.LoadScene(nextSceneName);
+        }
     }
 }
