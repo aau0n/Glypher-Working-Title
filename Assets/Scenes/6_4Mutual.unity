@@ -169,13 +169,13 @@ MonoBehaviour:
   - "\uB124\uAC00 \uCC98\uC74C \uC654\uC744 \uB54C, \uB098\uB791 \uBE44\uC2B7\uD558\uAC8C
     \uC0DD\uACA8\uC11C \uBB34\uCC99 \uB180\uB790\uC5B4.\\n\uB108\uB294 \uBD84\uBA85
     <color=#FF9900>\uC778\uAC04</color>\uC774\uB77C\uACE0 \uD588\uC9C0?"
-  - "\uAE00\uB9AC\uD53C\uC6B0\uC2A4\uC5D0\uB294 \uBB34\uCC99 \uB2E4\uC591\uD55C \uC885\uC871\uB4E4\uC774
-    \uC788\uC5B4\uC11C,\\n\uB124\uAC8C \uB9DE\uB294 \uC2DC\uC124\uB3C4 \uC5BC\uB9C8
-    \uC5C6\uC744\uAC70\uC57C."
+  - "<color=#FF9900>\uAE00\uB9AC\uD53C\uC6B0\uC2A4</color>\uC5D0\uB294 \uBB34\uCC99
+    \uB2E4\uC591\uD55C \uC885\uC871\uB4E4\uC774 \uC788\uC5B4\uC11C,\\n\uB124\uAC8C
+    \uB9DE\uB294 \uC2DC\uC124\uB3C4 \uC5BC\uB9C8 \uC5C6\uC744\uAC70\uC57C."
   - "\uD639\uC2DC \uD544\uC694\uD55C \uAC8C \uC788\uB2E4\uBA74 \uB9D0\uD574.\\n\uC6B0\uB9B0
     \uBE44\uC2B7\uD558\uB2C8\uAE4C, \uB0B4\uAC00 \uB3C4\uC6C0\uC744 \uC904 \uC218
-    \uC788\uC744\uC9C0\uB3C4 \uBAB0\uB77C.\n\uB2E4\uC74C\uC5D0\uB294 \uB124 \uACE0\uD5A5\uC5D0
-    \uB300\uD55C \uC774\uC57C\uAE30\uB97C \uC880 \uB354 \uB4E4\uB824\uC918.\\n\uC798
+    \uC788\uC744\uC9C0\uB3C4 \uBAA8\uB974\uC9C0.\n\uB2E4\uC74C\uC5D0\uB294 \uB124
+    \uACE0\uD5A5\uC5D0 \uB300\uD55C \uC774\uC57C\uAE30\uB97C \uC880 \uB354 \uB4E4\uB824\uC918.\\n\uC798
     \uC790, \uAE00\uB9AC\uD37C!"
   difficultActivateAfterSentence: 1
   normalActivateAfterSentence: 3
@@ -192,11 +192,11 @@ Transform:
   m_GameObject: {fileID: 460097017}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -17.051575, y: -12.756714, z: 0}
+  m_LocalPosition: {x: 942.9484, y: 527.2433, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1267107842}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &560519889
 GameObject:
@@ -259,7 +259,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -788610260216499160, guid: 42774dbec0eac654a894f3f337d5aae0, type: 3}
+  m_Sprite: {fileID: 6288124012532378383, guid: 98502d500c206bc45a16ab10c43e0740, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1272,7 +1272,6 @@ RectTransform:
   m_Children:
   - {fileID: 830299321}
   - {fileID: 810947296}
-  - {fileID: 460097019}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1481,3 +1480,4 @@ SceneRoots:
   - {fileID: 560519891}
   - {fileID: 1312904231}
   - {fileID: 1267107842}
+  - {fileID: 460097019}
