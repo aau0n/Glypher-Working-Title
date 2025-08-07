@@ -727,15 +727,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typer: {fileID: 1666080436}
   typingSpeed: 0.07
-  txt_name: {fileID: 1597149081}
   sentences:
   - "\uCC98\uC74C\uC774\uB77C\uACE0\uB294 \uC0DD\uAC01 \uBABB\uD560 \uC815\uB3C4\uC758
     \uC2E4\uB825\uC774\uC57C!"
   - "\uC774\uC815\uB3C4\uBA74 \uBC14\uB85C \uB2E4\uC74C \uC190\uB2D8\uC744 \uBC1B\uC544\uB3C4
-    \uB418\uACA0\uB294 \uAC78?\n\uB354 \uC54C\uB824\uC904 \uAC83\uB3C4 \uC5C6\uACA0\uC5B4."
+    \uB418\uACA0\uB294\uAC78?\n\uB354 \uC54C\uB824\uC904 \uAC83\uB3C4 \uC5C6\uACA0\uC5B4."
   nextSentence: {fileID: 771216369}
   toNextScene: {fileID: 2146459243}
-  nextSceneName: 7BridgeNight
+  nextSceneName: 6_4Mutual
 --- !u!4 &792103538
 Transform:
   m_ObjectHideFlags: 0
@@ -1279,8 +1278,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1291,7 +1290,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 18
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
