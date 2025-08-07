@@ -643,6 +643,7 @@ MonoBehaviour:
   inkBasicGreen: {fileID: 2165280935660055903, guid: c947f5bb52e3ad740b1c17b304635be0, type: 3}
   inkBasicPink: {fileID: 1728871321806063852, guid: c947f5bb52e3ad740b1c17b304635be0, type: 3}
   inkBasicBlue: {fileID: -3475506208236823983, guid: c947f5bb52e3ad740b1c17b304635be0, type: 3}
+  typer: {fileID: 1102154572}
 --- !u!1 &648343285
 GameObject:
   m_ObjectHideFlags: 0

@@ -42,6 +42,8 @@ public class TattooGameManager : MonoBehaviour
     private Color green = new Color32(0x70, 0xE7, 0x4E, 0xFF);
     private Color blue = new Color32(0x60, 0x22, 0xF2, 0xFF);
 
+    public TextTyper typer; // Inspector에서 TextTyper 스크립트가 붙은 오브젝트 연결
+
     void Start()
     {
         defaultInkPosition1 = ink1.rectTransform.anchoredPosition;
