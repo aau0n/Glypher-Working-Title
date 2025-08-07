@@ -270,6 +270,7 @@ MonoBehaviour:
   delay: 1
   moveUpDistance: 100
   duration: 1
+  coinSound: {fileID: 8300000, guid: 2a71d8e8ea428e0409d3df636b9f0192, type: 3}
 --- !u!114 &200892332
 MonoBehaviour:
   m_ObjectHideFlags: 0

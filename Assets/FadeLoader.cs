@@ -55,4 +55,4 @@ public class FadeLoader : MonoBehaviour
         fadePanel.color = new Color(0, 0, 0, 1);
         SceneManager.LoadScene(sceneName);
     }
-}
+} 
