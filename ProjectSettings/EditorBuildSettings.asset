@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Scenes/5Tattoo.unity
     guid: 556e55d79b7387b4e971911d16252da0
   - enabled: 1
-    path: Assets/Scenes/6AfterTattoo.unity
+    path: Assets/Scenes/6_1Success.unity
     guid: c3d15f3a44d53c048bf7723df896ab7a
   - enabled: 1
     path: Assets/Scenes/7BridgeNight.unity
