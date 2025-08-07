@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TattooGameManager : MonoBehaviour
@@ -196,7 +197,7 @@ public class TattooGameManager : MonoBehaviour
     bool IsTransparent(Color color) =>
         AreColorsSimilar(color, Color.clear);
 
-    bool AreColorsSimilar(Color a, Color b, float threshold = 0.1f) =>
+    bool AreColorsSimilar(Color a, Color b, float threshold = 0.01f) =>
         Mathf.Abs(a.r - b.r) < threshold &&
         Mathf.Abs(a.g - b.g) < threshold &&
         Mathf.Abs(a.b - b.b) < threshold;
@@ -266,7 +267,7 @@ public class TattooGameManager : MonoBehaviour
         else if (img == perfectImage) rt.anchoredPosition = perfectDefaultPos;
         else if (img == missImage) rt.anchoredPosition = missDefaultPos;
 
-        rt.anchoredPosition += new Vector2(Random.Range(-20f, 20f), Random.Range(-20f, 20f));
+        rt.anchoredPosition += new Vector2(Random.Range(-30f, 30f), Random.Range(-30f, 30f));
 
         // 스케일 초기화
         img.transform.localScale = Vector3.zero;
@@ -406,4 +407,20 @@ public class TattooGameManager : MonoBehaviour
         if (typer != null)
             typer.StartTyping("좋아. 잘하고 있어!");
     }
+
+    public void CheckFinalScoreAndLoadNextScene()
+    {
+        int finalScore = ScoreManager.GetFinalScore();
+        Debug.Log($"[최종 점수] {finalScore}");
+
+        if (finalScore >= 90)
+            SceneManager.LoadScene("6_1Success");  // 6-1번 씬으로 이동
+
+        else if (finalScore >= 70)
+            SceneManager.LoadScene("6_2Dissapoint");  // 실패시 대체 씬
+        else
+            SceneManager.LoadScene("6_3Fail");
+    }
+
+
 }

@@ -561,9 +561,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 603278476}
-        m_TargetAssemblyTypeName: SceneChanger_5to6, Assembly-CSharp
-        m_MethodName: SceneChange
+      - m_Target: {fileID: 645755705}
+        m_TargetAssemblyTypeName: TattooGameManager, Assembly-CSharp
+        m_MethodName: CheckFinalScoreAndLoadNextScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
