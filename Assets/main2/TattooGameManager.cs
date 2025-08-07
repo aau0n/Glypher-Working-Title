@@ -9,7 +9,7 @@ public class TattooGameManager : MonoBehaviour
     public GameObject tileGreenPrefab;
     public GameObject tileBluePrefab;
     public Transform gridParent;
-    public SpriteRenderer backgroundPattern;
+    public Image BackTattooPattern;
     public RectTransform cursor;
 
     public Image ink1; // 연두색
@@ -40,7 +40,8 @@ public class TattooGameManager : MonoBehaviour
     private Color pink = new Color32(0xD0, 0x88, 0xDF, 0xFF);
     private Color green = new Color32(0x7B, 0xE1, 0x96, 0xFF);
     private Color blue = new Color32(0x76, 0x96, 0xDF, 0xFF);
-    private Color clear = new Color32(0x93, 0xBB, 0xCD, 0xFF);
+
+
 
     public TextTyper typer;
 
@@ -158,7 +159,7 @@ public class TattooGameManager : MonoBehaviour
 
     void ExtractCorrectPattern()
     {
-        Texture2D tex = backgroundPattern.sprite.texture;
+        Texture2D tex = BackTattooPattern.sprite.texture;
 
         for (int y = 0; y < 10; y++)
         {
@@ -175,10 +176,10 @@ public class TattooGameManager : MonoBehaviour
 
     bool IsTransparent(Color color)
     {
-        return AreColorsSimilar(color, clear);
+        return AreColorsSimilar(color, Color.clear);
     }
 
-    bool AreColorsSimilar(Color a, Color b, float threshold = 0.1f)
+    bool AreColorsSimilar(Color a, Color b, float threshold = 0.3f)
     {
         return Mathf.Abs(a.r - b.r) < threshold &&
                Mathf.Abs(a.g - b.g) < threshold &&
@@ -190,9 +191,11 @@ public class TattooGameManager : MonoBehaviour
         if (AreColorsSimilar(pixel, pink)) return pink;
         if (AreColorsSimilar(pixel, green)) return green;
         if (AreColorsSimilar(pixel, blue)) return blue;
-        if (AreColorsSimilar(pixel, clear)) return clear;
-        return Color.clear;
+
+        // 어떤 지정된 색상과도 매칭되지 않으면 투명으로 처리
+        return Color.clear; // 완전한 투명
     }
+
 
     void PaintCurrentTile()
     {
@@ -294,7 +297,7 @@ public class TattooGameManager : MonoBehaviour
 
                 total++;
 
-                if (AreColorsSimilar(correct, clear))
+                if (AreColorsSimilar(correct, Color.clear))
                 {
                     if (user == Color.clear)
                         score++;
@@ -329,5 +332,5 @@ public class TattooGameManager : MonoBehaviour
             typer.StartTyping("좋아. 잘 하고 있어!");
     }
 
-    
+
 }
