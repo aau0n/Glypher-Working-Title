@@ -1,4 +1,4 @@
-using System.Collections;       // ← 이게 꼭 필요합니다!
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
@@ -43,7 +43,8 @@ public class VideoSceneController : MonoBehaviour
         {
             double timeLeft = videoPlayer.length - videoPlayer.time;
 
-            if (timeLeft < fadeDuration && !isFadingOut)
+            // ✅ 영상 끝나기 2초 전에 페이드아웃 시작
+            if (timeLeft <= 2f && !isFadingOut)
             {
                 isFadingOut = true;
                 StartCoroutine(FadeOut());
