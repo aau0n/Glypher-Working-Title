@@ -7,7 +7,7 @@ public class SceneChanger_5to6 : MonoBehaviour
 {
     public void SceneChange()
     {
-        SceneManager.LoadScene("6AfterTattoo");
+        SceneManager.LoadScene("6_1Success");
         Debug.Log("next 버튼 클릭");
     }
 }
