@@ -9,7 +9,7 @@ public class TattooGameManager : MonoBehaviour
     public GameObject tileGreenPrefab;
     public GameObject tileBluePrefab;
     public Transform gridParent;
-    public Image BackTattooPattern;
+    public Image Back_tattoo;
     public RectTransform cursor;
 
     public Image ink1; // 연두색
@@ -22,6 +22,7 @@ public class TattooGameManager : MonoBehaviour
     public Sprite inkBasicGreen;
     public Sprite inkBasicPink;
     public Sprite inkBasicBlue;
+
 
     private GameObject[,] tiles = new GameObject[10, 10];
     private Color[,] correctPattern = new Color[10, 10];
@@ -159,7 +160,7 @@ public class TattooGameManager : MonoBehaviour
 
     void ExtractCorrectPattern()
     {
-        Texture2D tex = BackTattooPattern.sprite.texture;
+        Texture2D tex = Back_tattoo.sprite.texture;
 
         for (int y = 0; y < 10; y++)
         {
@@ -169,6 +170,7 @@ public class TattooGameManager : MonoBehaviour
                 int py = y * 72 + 36;
 
                 Color pixelColor = tex.GetPixel(px, py);
+
                 correctPattern[x, y] = ClassifyColor(pixelColor);
             }
         }
@@ -269,6 +271,17 @@ public class TattooGameManager : MonoBehaviour
         img.color = Color.clear;
     }
 
+    private IEnumerator ShowDialogueSequence()
+    {
+        yield return new WaitForSeconds(1f);
+
+        if (typer != null)
+            typer.StartTyping("A,S,D로 잉크색을 바꾸고,\n좌클릭으로 새기기,\n스페이스바로 넘어가기!");
+
+        yield return new WaitForSeconds(4f);
+
+    }
+
     void CalculateScore()
     {
         int score = 0;
@@ -316,20 +329,12 @@ public class TattooGameManager : MonoBehaviour
         float percentage = (total > 0) ? ((float)score / total) * 100f : 0f;
 
         Debug.Log($"[최종 점수] {score}/{total} ({percentage:F1}%)");
-    }
 
-
-    private IEnumerator ShowDialogueSequence()
-    {
-        yield return new WaitForSeconds(1f);
-
-        if (typer != null)
-            typer.StartTyping("A,S,D로 잉크색을 바꾸고,\n좌클릭으로 새기기,\n스페이스바로 넘어가기!");
-
-        yield return new WaitForSeconds(5f);
-
-        if (typer != null)
+        if (typer != null && score > 30)
+        {
             typer.StartTyping("좋아. 잘 하고 있어!");
+        }
+
     }
 
 
