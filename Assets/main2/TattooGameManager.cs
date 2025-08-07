@@ -15,6 +15,14 @@ public class TattooGameManager : MonoBehaviour
     public Image Back_tattoo;
     public RectTransform cursor;
 
+    public AudioSource audioSource;     // 효과음 재생용 AudioSource
+    public AudioClip tattooSuccess;     // 타투 판정 성공
+    public AudioClip tattooMiss;        // 타투 판정 미스
+    public AudioClip inkSelectOne;      // 잉크 선택 1
+    public AudioClip inkSelectTwo;      // 잉크 선택 2
+    public AudioClip inkSelectThree;    // 잉크 선택 3
+    public AudioClip timeIsOver;        // 타이머 종료 시
+
     public Image ink1; // 연두색
     public Image ink2; // 핑크색
     public Image ink3; // 보라색
@@ -93,6 +101,8 @@ public class TattooGameManager : MonoBehaviour
         elapsedTime += Time.deltaTime;
         if (elapsedTime > timeLimit)
         {
+            // 타이머 종료
+            audioSource.PlayOneShot(timeIsOver);
             Debug.Log("[시간 초과] 80초 내에 완료하지 못해 점수 0 처리");
             ScoreManager.score = 0;
             ScoreManager.total = 100;
@@ -101,18 +111,22 @@ public class TattooGameManager : MonoBehaviour
             return;
         }
 
+        // 잉크 선택
         if (Input.GetKeyDown(KeyCode.A))
         {
+            audioSource.PlayOneShot(inkSelectOne);
             selectedPrefab = tileGreenPrefab;
             HighlightInk(ink1, inkPopGreen);
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
+            audioSource.PlayOneShot(inkSelectTwo);
             selectedPrefab = tilePinkPrefab;
             HighlightInk(ink2, inkPopPink);
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
+            audioSource.PlayOneShot(inkSelectThree);
             selectedPrefab = tileBluePrefab;
             HighlightInk(ink3, inkPopBlue);
         }
@@ -240,6 +254,8 @@ public class TattooGameManager : MonoBehaviour
             ShowFeedback(missImage);
             if (typer != null)
             {
+                // 판정 미스
+                // audioSource.PlayOneShot(tattooMiss);
                 typer.StartTyping("아야! 아프잖아");
                 StartCoroutine(ShowPositiveAfterDelay(4f));
             }
@@ -385,11 +401,16 @@ public class TattooGameManager : MonoBehaviour
                     Color user = userInput[x, y];
                     if (AreColorsSimilar(correct, Color.clear))
                     {
-                        if (user == Color.clear) score++;
-                    }
-                    else if (AreColorsSimilar(correct, user))
-                    {
-                        score++;
+                        if (user == Color.clear)
+                        {
+                            score++; // 투명한 거 지나감
+                            // audioSource.PlayOneShot(tattooSuccess);
+                        }
+                        else if (AreColorsSimilar(correct, user))
+                        {
+                            score++; // 컬러 일치, 판정 성공
+                            // audioSource.PlayOneShot(tattooSuccess);
+                        }
                     }
                 }
             }
