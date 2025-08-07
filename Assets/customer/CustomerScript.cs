@@ -2,16 +2,40 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 
 public class CustomerScript : MonoBehaviour
 {
     public GameObject customerNormal, customerSmile; // 손님 기본 모습, 웃는 애니메이션 에셋
     public TextTyper typer; // Inspector에서 TextTyper 스크립트가 붙은 오브젝트 연결
+    public float typingSpeed = 0.05f; // 한 글자 나오는 시간 간격
     public TMP_Text txt_name; // 손님 이름 TMP 텍스트
     public AudioClip doorEffectClip; // 문이 여닫히는 효과음
     public AudioSource audioSource;
     public float fadeDuration = 3f; // 손님이 서서히 등장하는 시간(초)
+
+    // 미리 넣어둘 문장 배열
+    public string[] sentences =
+    {
+        "안녕! <color=#FF9900>글리피우스</color>에 온 걸 환영해.",
+        "생활에는 좀 적응했니? 시간도 참 빠르다.\n네가 등장했을 때 모두가 얼마나 놀랐는지 몰라! 하늘에서 갑자기 떨어진 이방인이었잖아.",
+        "어쨌든 오늘부터 너도 글리퍼네! 너의 친구로서 이것저것 알려주러 왔어.\n그럼 실력이 어떤지 한번 볼까?",
+    };
+
+    private int currSentence = 0;
+    private bool isTyping = false;
+    private bool waitingForClick = false;
+
+    public GameObject nextSentence;        // V (다음 대화로) 오브젝트
+    public GameObject toNextScene;     // >>NEXT (다음 씬으로) 오브젝트
+    public string nextSceneName = "4Stencil"; // 전환할 씬 이름
+    private bool dialogueEnded = false;  // di마지막 문장 출력 끝났는지
+    private bool readyToSwitch = false;  // endTriangleIndicator가 떴는지
+
+    // Object 언제 등장시킬지 인덱스 (0부터 시작)
+    public int smileActivateAfterSentence = 1; // 1번(두 번째) 문장과 함께
+    public int normalActivateAfterSentence = 2; // 2번(세 번째) 문장과 함께
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -20,10 +44,16 @@ public class CustomerScript : MonoBehaviour
         customerNormal.SetActive(false);
         customerSmile.SetActive(false);
         txt_name.gameObject.SetActive(false);
+        nextSentence.SetActive(false);
+        toNextScene.SetActive(false);
+
+        currSentence = 0;
+        if (nextSentence != null) nextSentence.SetActive(false);
+        if (toNextScene != null) toNextScene.SetActive(false);
 
         StartCoroutine(Sequence()); // 문이 여닫히는 효과음과 함께 손님 모습 등장
 
-        
+
     }
 
     IEnumerator Sequence()
@@ -38,9 +68,7 @@ public class CustomerScript : MonoBehaviour
 
         yield return new WaitForSeconds(fadeDuration);
 
-        if (typer != null)
-            typer.StartTyping("안녕 글리퍼! <color=#FF9900>글리피우스</color>에 온 걸 환영해. ");
-        
+        ShowCurrentSentence();
 
     }
 
@@ -102,6 +130,139 @@ public class CustomerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // 문장 출력 후 클릭 대기
+        if (waitingForClick && Input.GetMouseButtonDown(0))
+        {
+            NextSentence();
+        }
+        // 마지막 이미지가 뜬 상태에서 클릭하면 씬 전환
+        if (readyToSwitch && Input.GetMouseButtonDown(0))
+        {
+            SceneManager.LoadScene(nextSceneName);
+        }
+    }
+    
+    void ShowCurrentSentence()
+    {
+        StartCoroutine(TypeTextOneByOne(sentences[currSentence]));
+    }
+
+    IEnumerator TypeTextOneByOne(string message)
+    {
+        isTyping = true;
+        waitingForClick = false;
+        if (nextSentence != null) nextSentence.SetActive(false);
+
+        typer.textComponent.text = "";
+
+        // foreach (char c in message)
+        // {
+        //     typer.textComponent.text += c;
+        //     yield return new WaitForSeconds(typingSpeed);
+        // }
+
+        // isTyping = false;
+
+        int i = 0;
+        string currentText = "";
+        float delay = typingSpeed;  // typingSpeed는 초당글자간격이므로 그대로 씁니다.
+
+        while (i < message.Length)
+        {
+            if (message[i] == '<') // 태그 시작 체크
+            {
+                int tagEnd = message.IndexOf('>', i);
+                if (tagEnd == -1)
+                {
+                    // 닫는 태그가 없으면 루프 종료하거나 남은 문자 처리
+                    break;
+                }
+                // 태그 전체를 currentText에 한꺼번에 추가
+                currentText += message.Substring(i, tagEnd - i + 1);
+                i = tagEnd + 1; // 인덱스 이동
+            }
+            else if (message[i] == '\\')
+            {
+                if (i + 1 < message.Length)
+                {
+                    if (i + 1 < message.Length)
+                    {
+                        char nextChar = message[i + 1];
+
+                        if (nextChar == 'n')
+                            currentText += '\n'; // 줄바꿈 문자
+                        else if (nextChar == 't')
+                            currentText += '\t'; // 탭 문자 예시
+
+                        else
+                        {
+                            // 정의하지 않은 시퀀스는 그대로 출력
+                            currentText += '\\';
+                            currentText += nextChar;
+                        }
+
+                        i += 2; // '\'와 다음 문자 두 글자를 처리했으므로 인덱스 2칸 증가
+                    }
+                }
+            }
+            else
+            {
+                currentText += message[i];
+                i++;
+            }
+
+            typer.textComponent.text = currentText; // TMP 텍스트에 현재까지 추가된 텍스트 반영
+
+            yield return new WaitForSeconds(delay); // 타이핑 속도만큼 기다림
+        }
+
+        isTyping = false;  
+
+        if (currSentence < sentences.Length - 1)
+        {
+            // 마지막 문장 전까진 삼각형 활성화
+            if (nextSentence != null) nextSentence.SetActive(true);
+            waitingForClick = true;
+        }
+        else
+        {
+            // 마지막 문장 끝, endImage를 띄우고 클릭을 대기!
+            dialogueEnded = true;
+            StartCoroutine(ShowEndImageAndWaitForClick());
+        }
+    }
+
+    void NextSentence()
+    {
+        waitingForClick = false;
+        if (nextSentence != null) nextSentence.SetActive(false);
+
+        currSentence++;
+
+        if (currSentence == smileActivateAfterSentence && customerSmile != null)
+        {
+            customerSmile.SetActive(true);
+            customerNormal.SetActive(false);
+        }
+        if (currSentence == normalActivateAfterSentence && customerNormal != null)
+        {
+            customerNormal.SetActive(true);
+            customerSmile.SetActive(false);
+        }    
+
+        if (currSentence < sentences.Length)
+        {
+            ShowCurrentSentence();
+        }
+    }
+
+    IEnumerator ShowEndImageAndWaitForClick()
+    {
+        if (nextSentence != null) nextSentence.SetActive(false);
+        if (toNextScene != null) toNextScene.SetActive(true);
+
+        readyToSwitch = true; // 이제 클릭하면 씬 전환!
+
+        yield return null; // 클릭 대기는 Update()에서 처리
     }
 }
