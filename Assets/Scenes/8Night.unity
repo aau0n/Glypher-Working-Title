@@ -711,7 +711,7 @@ MonoBehaviour:
   fadePanel: {fileID: 1246370022}
   fadeDuration: 4
   videoPlayer: {fileID: 743822037}
-  nextSceneName: 9Sleep
+  nextSceneName: 1First
   creditTextGroup1: {fileID: 2050275999}
   creditTextGroup2: {fileID: 890628005}
   creditTextGroup3: {fileID: 1687656467}
