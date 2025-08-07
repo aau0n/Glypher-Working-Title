@@ -293,7 +293,11 @@ public class TattooGameManager : MonoBehaviour
         if (typer != null)
             typer.StartTyping("A,S,D로 잉크색을 바꾸고,\n좌클릭으로 새기기,\n스페이스바로 넘어가기!");
 
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(4.5f);
+
+        if(typer !=null)
+            typer.StartTyping("좋아. 잘하고 있어!");
+
 
     }
 
@@ -345,10 +349,7 @@ public class TattooGameManager : MonoBehaviour
 
         Debug.Log($"[최종 점수] {score}/{total} ({percentage:F1}%)");
 
-        if (typer != null && score > 30)
-        {
-            typer.StartTyping("좋아. 잘 하고 있어!");
-        }
+        
     }
 
 
