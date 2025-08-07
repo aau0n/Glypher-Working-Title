@@ -950,7 +950,7 @@ MonoBehaviour:
   typer: {fileID: 1572358853}
   typingSpeed: 0.05
   txt_name: {fileID: 2144953198}
-  doorEffectClip: {fileID: 8300000, guid: ba47ededc29024b38b09ca7d6d7c322a, type: 3}
+  doorEffectClip: {fileID: 8300000, guid: b7df578bfdf2ac34c812b8e9164abc97, type: 3}
   audioSource: {fileID: 502180748}
   typingSoundClip: {fileID: 8300000, guid: 18e1f4e7b72cd834ea06864889dadd2f, type: 3}
   sentenceEndSoundClip: {fileID: 8300000, guid: 04e80335e9333074eb2a00f61ae22acb, type: 3}
